@@ -1,0 +1,205 @@
+import javafx.geometry.Point2D;
+import java.lang.Math;
+public class Triangle
+{
+
+    final double ONE = 1.0;
+    final double TWO = 2.0;
+    //Declared ONE,TWO as constant variables
+    Point2D setA;
+    Point2D setB;
+    Point2D setC;
+    /*----------------------------Triangle----------------------------
+   |  Method: Triangle
+   |
+   |  Purpose: Gets userInput and formats it to setA,setB,setC
+   |
+   |  @param  double xA, double yA, double xB, double yB
+   |
+   |  @return  setA,setB,setC
+   *-------------------------------------------------------------------*/
+    public Triangle(double xA, double yA, double xB, double yB,
+                    double xC, double yC)
+    {
+        setA = new Point2D(xA, yA);
+        setB = new Point2D(xB, yB);
+        setC = new Point2D(xC, yC);
+        //Formats userInput into specfic points
+    }//End of Triangle
+
+    public Point2D getSetA()
+    {
+        return setA;
+    }//End of getSetA
+
+    public Point2D getSetB()
+    {
+        return setB;
+    }//getSetB
+
+    public Point2D getSetC()
+    {
+        return setC;
+    }//End of getSetC
+    //Formats the userInput into setA,setB,setC
+     /*----------------------------getSideA()----------------------------
+    |  Method: getSideA()
+    |
+    |  Purpose: Uses setA,setB and calculates sideA
+    |
+    |  @param  setA,setB
+    |
+    |  @return  sideA
+    *-------------------------------------------------------------------*/
+    public double getSideA()
+    {
+        double sideA;
+        sideA = setA.distance(setB);
+        return sideA;
+    }//End of getSideA
+    /*----------------------------getSideB()----------------------------
+    |  Method: getSideB()
+    |
+    |  Purpose: Uses setB,setC and calculates sideB
+    |
+    |  @param  setB,setC
+    |
+    |  @return  sideB
+    *-------------------------------------------------------------------*/
+    public double getSideB()
+    {
+        double sideB;
+        sideB = setB.distance(setC);
+        return sideB;
+    }//End of getSideB
+    /*----------------------------getSideC()----------------------------
+    |  Method: getSideC()
+    |
+    |  Purpose: Uses setC,setA and calculates sideC
+    |
+    |  @param  setC,setA
+    |
+    |  @return  sideC
+    *-------------------------------------------------------------------*/
+    public double getSideC()
+    {
+        double sideC;
+        sideC = setC.distance(setA);
+        return sideC;
+    }//End of getSideC
+    /*----------------------------getPerimerter()----------------------------
+    |  Method: getPerimeter()
+    |
+    |  Purpose: uses getSideA(),getSideB(),getSideC() to calculate perimeter
+    |
+    |  @param  getSideA(),getSideB(),getSideC()
+    |
+    |  @return  Perimeter
+    *-------------------------------------------------------------------*/
+    public double getPerimeter()//Computes UserInput to Calculate Perimeter
+    {
+        double Perimeter;
+        Perimeter = getSideA() + getSideB() + getSideC();
+        return Perimeter;
+    }//End of getPerimeter
+    /*----------------------------getArea()----------------------------
+    |  Method: getArea()
+    |
+    |  Purpose: uses getPerimeter, getSideA,getSideB,getSideC to calculate
+    |  Area
+    |
+    |  @param  getPerimeter,getSideA(),getSideB(),getSideC()
+    |
+    |  @return  getArea
+    *-------------------------------------------------------------------*/
+    public double getArea()//Computes UserInput to Calculate Perimeter
+    {
+        double semipi = (ONE / TWO) * getPerimeter();
+        return ((Math.sqrt(semipi * (semipi - getSideA())
+                * (semipi - getSideB()) * (semipi - getSideC()))));
+    }//End of getArea
+    /*----------------------------getAngleA()----------------------------
+    |  Method: getAngleA()
+    |
+    |  Purpose: Uses setA,setB,setC to Calculate Angle A
+    |
+    |
+    |  @param  setA,setB,setC
+    |
+    |  @return  setA.angle
+    *-------------------------------------------------------------------*/
+    public double getAngleA()
+    {
+
+        return setA.angle(setB, setC);
+    }//End of getAngleA
+    /*----------------------------getAngleB()----------------------------
+    |  Method: getAngleB()
+    |
+    |  Purpose: Uses setA,setB,setC to Calculate Angle B
+    |
+    |
+    |  @param  setA,setB,setC
+    |
+    |  @return  setB.angle
+    *-------------------------------------------------------------------*/
+    public double getAngleB()
+    {
+
+        return setB.angle(setC, setA);
+    }//End of getAngleB
+    /*----------------------------getAngleC()----------------------------
+    |  Method: getAngleC()
+    |
+    |  Purpose: Uses setA,setB,setC to Calculate Angle C
+    |
+    |
+    |  @param  setA,setB,setC
+    |
+    |  @return  setC.angle
+    *-------------------------------------------------------------------*/
+    public double getAngleC()
+    {
+        return setC.angle(setA, setB);
+    }//End of getAngleC
+    //Uses setA,setB,setC and computes getAngleA,getAngleB,getAngleC
+    /*----------------------------isEquilateral()----------------------------
+    |  Method: isEquilateral()
+    |
+    |  Purpose: Uses getAngleA,getAngleB,getAngleC and calculate whether the
+    |  triangle is Equilateral
+    |
+    |
+    |  @param  getAngleA,getAngleB,getAngleC,SIXTYDEGREE(60)
+    |
+    |  @return  True/False(based on userInput)
+    *-------------------------------------------------------------------*/
+    public boolean isEquilateral()
+    {
+        final int SIXTYDEGREE = 60;
+        return Math.abs(getAngleA() - SIXTYDEGREE) <= 0.01 &&
+                Math.abs(getAngleB() - SIXTYDEGREE)
+                        <= 0.01 && Math.abs(getAngleC() - SIXTYDEGREE) <= 0.01;
+        //This Boolean is used to calculate an Equilateral triangle
+    }//End of isEquilateral
+    /*----------------------------isRightAngle()----------------------------
+    |  Method: isRightAngle()
+    |
+    |  Purpose: Uses getAngleA,getAngleB,getAngleC and calculate whether the
+    |  triangle is a Right Angle Triangle
+    |
+    |
+    |  @param  getAngleA,getAngleB,getAngleC,NINETYDEGREE(90)
+    |
+    |  @return  True/False(based on userInput)
+    *-------------------------------------------------------------------*/
+    public boolean isRightAngle()
+    {
+        final int NINETYDEGREE = 90;
+        return Math.abs(getAngleA() - NINETYDEGREE) <= 0.01
+                || Math.abs(getAngleB() - NINETYDEGREE) <= 0.01
+                || Math.abs(getAngleC() - NINETYDEGREE) <= 0.01;
+        //This Boolean is used to calculate a Right Angle Triangle
+    }//End of isRightAngle
+
+}//End Of Triangle Class
