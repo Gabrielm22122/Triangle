@@ -1,0 +1,91 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class TriangleTester {
+
+    public static void main(String[] args) {
+        System.out.println("Enter the x,y coordinates of three points in this "
+                + "order\n(x1,y1) (x2,y2) (x3,y3)\nSeparate each coordinate with a "
+                + "<return>:");
+
+        double xA;
+        double xB;
+        double xC;
+        double yA;
+        double yB;
+        double yC;
+        //The Variables Declared above are used to store the values invloved
+        //with calculation
+        xA = intVal();
+        yA = intVal();
+        xB = intVal();
+        yB = intVal();
+        xC = intVal();
+        yC = intVal();
+        //Stores The Data Inputed By the User
+        Triangle triangle1 = new Triangle(xA, yA, xB, yB, xC, yC);
+        DecimalFormat decimalFormat = new DecimalFormat("###.####");
+        printLn(triangle1, decimalFormat);
+    }//End of Main
+    /*----------------------------IntVal----------------------------
+   |  Method IntVal
+   |
+   |  Purpose: Protects the program from crashing when a invalid number is
+   |  entered
+   |
+   |  @param  userInput
+   |
+   |  @return  validates whether or not the value entered is within the
+   |  programs parameters
+   *-------------------------------------------------------------------*/
+    public static double intVal() {
+        final int SETVALUEZERO = 0;
+        Scanner userInput = new Scanner(System.in);
+        double value = SETVALUEZERO;
+        boolean valExist = false;
+        do {
+            if (userInput.hasNextDouble()) {
+                value = userInput.nextDouble();
+                valExist = true;
+            } else {
+                System.out.println("Invalid Input, Please Enter A Valid Number");
+                userInput.next();
+            } // end else
+        } while (!valExist);
+        return value;
+    }//End intVal()
+
+     /*----------------------------printLn----------------------------
+    |  Method: printLn
+    |
+    |  Purpose: Prints information desired by the user
+    |
+    |  @param  triangle1, decimalFormat
+    |
+    |  @return  returns information back to the user
+    *-------------------------------------------------------------------*/
+
+    public static void printLn(Triangle triangle1, DecimalFormat decimalFormat) {
+        System.out.println("Point (X1,Y1) Coordinates:\t\t   " + "(" + triangle1.getSetA().getX() + ", " + triangle1.getSetB().getY() + ")\n"
+                + "Point (X2,Y2) Coordinates:\t\t   " + "(" + triangle1.getSetB().getX() + ", " + triangle1.getSetB().getY() + ")\n"
+                + "Point (X3,Y3) Coordinates:\t\t   " + "(" + triangle1.getSetC().getX() + ", " + triangle1.getSetC().getY() + ")\n\n\n"
+                + //Prints The Points Inputed by the User
+                "Side One Length:\t\t\t   " + decimalFormat.format(triangle1.getSideA()) + "\n"
+                + "Side Two Length:\t\t\t   " + decimalFormat.format(triangle1.getSideB()) + "\n"
+                + "Side Three Length:\t\t           " + decimalFormat.format(triangle1.getSideC()) + "\n\n"
+                + //Prints The Computed Side Length
+                "Angle One:\t\t\t\t   " + decimalFormat.format(triangle1.getAngleA()) + " Degrees\n"
+                + "Angle Two:\t\t\t\t   " + decimalFormat.format(triangle1.getAngleB()) + " Degress\n"
+                + "Angle Three:\t\t\t\t   " + decimalFormat.format(triangle1.getAngleC()) + " Degress\n\n"
+                + //Prints The Computed Angle Measure
+                "The Perimeter of the triangle is:\t   " + decimalFormat.format(triangle1.getPerimeter()) + "\tunits" + "\n\n"
+                + //Prints the Perimeter
+                "The Area of the Triangle is:\t\t   " + decimalFormat.format(triangle1.getArea()) + "\tSquare units" + "\n\n"
+                + //Prints the Area
+                "The Triangle is Equilateral?:\t\t   " + triangle1.isEquilateral() + "\n\n"
+                + //Need To Add Calculation*//Prints whether the triangle is Equilateral or not
+                "The Triangle is Right-Angled?:\t\t   " + triangle1.isRightAngle());
+        //Need To Add Calculation*//Prints whether the triangle is Right-Angled or not
+
+    }//End of printLn()
+}//End  of Class TraingleTester
